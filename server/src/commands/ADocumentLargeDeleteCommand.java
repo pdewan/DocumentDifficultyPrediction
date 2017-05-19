@@ -3,9 +3,9 @@ package commands;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.cmu.scs.fluorite.commands.CutCommand;
+import fluorite.commands.EHCutCommand;
 
-public class ADocumentLargeDeleteCommand extends CutCommand {
+public class ADocumentLargeDeleteCommand extends EHCutCommand {
 
 	private int startIndex;
 	private int endIndex;

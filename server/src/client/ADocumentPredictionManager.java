@@ -18,15 +18,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import commands.DocumentStatusCorrection;
+
 import config.FactorySingletonInitializer;
 import difficultyPrediction.APredictionParameters;
 import difficultyPrediction.DifficultyPredictionSettings;
 import difficultyPrediction.DifficultyRobot;
 import difficultyPrediction.metrics.CommandClassificationSchemeName;
-import edu.cmu.scs.fluorite.commands.DifficulyStatusCommand.Status;
-import edu.cmu.scs.fluorite.commands.ICommand;
-import edu.cmu.scs.fluorite.model.EventRecorder;
-import server.HttpStuff;
+import fluorite.commands.DifficulyStatusCommand.Status;
+import fluorite.commands.EHICommand;
+import fluorite.model.EHEventRecorder;
 
 public class ADocumentPredictionManager implements DocumentPredictionManager {
 	private static int currentStatus; // 0 for making progress, 1 for facing
@@ -70,7 +70,7 @@ public class ADocumentPredictionManager implements DocumentPredictionManager {
 		DifficultyPredictionSettings.setReplayMode(true);
 		FactorySingletonInitializer.configure();
 		// Start EventRecorder
-		EventRecorder.getInstance().initCommands();
+		EHEventRecorder.getInstance().initCommands();
 		// Add ourselves as a status listener so we can receive predictions
 		DifficultyRobot.getInstance().addStatusListener(this);
 		// Enable this when debugging or analyzing on a local server - we can
@@ -80,8 +80,8 @@ public class ADocumentPredictionManager implements DocumentPredictionManager {
 		// APredictionController.createUI();
 	}
 
-	public void processEvent(ICommand event) {
-		EventRecorder.getInstance().recordCommand(event);
+	public void processEvent(EHICommand event) {
+		EHEventRecorder.getInstance().recordCommand(event);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class ADocumentPredictionManager implements DocumentPredictionManager {
 			} else {
 				status = Status.Insurmountable;
 			}
-			ICommand statusCommand = new DocumentStatusCorrection(status);
+			EHICommand statusCommand = new DocumentStatusCorrection(status);
 			// If student is struggling
 			if (newStatus == 1) {
 				try {

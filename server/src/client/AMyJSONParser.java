@@ -23,7 +23,7 @@ import commands.StyleCommand;
 import commands.SwitchTabsCommand;
 import commands.UnderlineCommand;
 import commands.UpdateURLCommand;
-import edu.cmu.scs.fluorite.commands.ICommand;
+import fluorite.commands.EHICommand;
 
 public class AMyJSONParser implements MyJSONParser {
 
@@ -43,7 +43,7 @@ public class AMyJSONParser implements MyJSONParser {
 			} else if (obj.get("type").equals("documentId")) {
 				long longId = obj.getLong("documentId");
 				String docIdString = obj.getString("documentIdString");
-				ICommand idCommand = new ADocumentIdCommand();
+				EHICommand idCommand = new ADocumentIdCommand();
 				((ADocumentIdCommand) idCommand).setDocumentIdLong(longId);
 				((ADocumentIdCommand) idCommand).setDocumentIdString(docIdString);
 				idCommand.setTimestamp(longId);
@@ -77,18 +77,18 @@ public class AMyJSONParser implements MyJSONParser {
 			// if more than 100 characters are being inserted, assume this is a
 			// large insert command
 			if (insertCommandObject.getString("content").length() > 100) {
-				ICommand largeInsertCommand = new ADocumentLargeInsertCommand();
+				EHICommand largeInsertCommand = new ADocumentLargeInsertCommand();
 				largeInsertCommand.setTimestamp(insertCommandObject.getLong("timeStamp"));
 				((ADocumentLargeInsertCommand) largeInsertCommand).setContent(insertCommandObject.getString("content"));
 				((ADocumentLargeInsertCommand) largeInsertCommand).setIndex(insertCommandObject.getInt("index"));
-				predictionManager.processEvent((ICommand) largeInsertCommand);
+				predictionManager.processEvent((EHICommand) largeInsertCommand);
 				// otherwise, it is a regular insert command
 			} else {
 				DocumentInsertCommand insertCommand = new ADocumentInsertCommand();
-				((ICommand) insertCommand).setTimestamp(insertCommandObject.getLong("timeStamp"));
+				((EHICommand) insertCommand).setTimestamp(insertCommandObject.getLong("timeStamp"));
 				insertCommand.setContent(insertCommandObject.getString("content"));
 				insertCommand.setIndex(insertCommandObject.getInt("index"));
-				predictionManager.processEvent((ICommand) insertCommand);
+				predictionManager.processEvent((EHICommand) insertCommand);
 			}
 		}
 		JSONArray deleteCommands = obj.getJSONArray("deleteCommands");
@@ -97,87 +97,87 @@ public class AMyJSONParser implements MyJSONParser {
 			// if more than 100 characters are being deleted, assume this is a
 			// large delete command
 			if (deleteCommandObject.getInt("endIndex") - deleteCommandObject.getInt("startIndex") > 100) {
-				ICommand largeDeleteCommand = new ADocumentLargeDeleteCommand();
+				EHICommand largeDeleteCommand = new ADocumentLargeDeleteCommand();
 				largeDeleteCommand.setTimestamp(deleteCommandObject.getLong("timeStamp"));
 				((ADocumentLargeDeleteCommand) largeDeleteCommand).setEndIndex(deleteCommandObject.getInt("endIndex"));
 				((ADocumentLargeDeleteCommand) largeDeleteCommand).setStartIndex(deleteCommandObject.getInt("startIndex"));
-				predictionManager.processEvent((ICommand) largeDeleteCommand);
+				predictionManager.processEvent((EHICommand) largeDeleteCommand);
 				// otherwise, it is a regular delete command
 			} else {
 				DocumentDeleteCommand deleteCommand = new ADocumentDeleteCommand();
-				((ICommand) deleteCommand).setTimestamp(deleteCommandObject.getLong("timeStamp"));
+				((EHICommand) deleteCommand).setTimestamp(deleteCommandObject.getLong("timeStamp"));
 				deleteCommand.setEndIndex(deleteCommandObject.getInt("endIndex"));
 				deleteCommand.setStartIndex(deleteCommandObject.getInt("startIndex"));
-				predictionManager.processEvent((ICommand) deleteCommand);
+				predictionManager.processEvent((EHICommand) deleteCommand);
 			}
 		}
 		JSONArray boldCommands = obj.getJSONArray("boldCommands");
 		for (int i = 0; i < boldCommands.length(); i++) {
 			StyleCommand boldCommand = new BoldCommand();
 			boldCommandObject = boldCommands.getJSONObject(i);
-			((ICommand) boldCommand).setTimestamp(boldCommandObject.getLong("timeStamp"));
+			((EHICommand) boldCommand).setTimestamp(boldCommandObject.getLong("timeStamp"));
 			boldCommand.setEndIndex(boldCommandObject.getInt("endIndex"));
 			boldCommand.setStartIndex(boldCommandObject.getInt("startIndex"));
-			predictionManager.processEvent((ICommand) boldCommand);
+			predictionManager.processEvent((EHICommand) boldCommand);
 		}
 		JSONArray underlineCommands = obj.getJSONArray("underlineCommands");
 		for (int i = 0; i < underlineCommands.length(); i++) {
 			StyleCommand underlineCommand = new UnderlineCommand();
 			underlineCommandObject = underlineCommands.getJSONObject(i);
-			((ICommand) underlineCommand).setTimestamp(underlineCommandObject.getLong("timeStamp"));
+			((EHICommand) underlineCommand).setTimestamp(underlineCommandObject.getLong("timeStamp"));
 			underlineCommand.setEndIndex(underlineCommandObject.getInt("endIndex"));
 			underlineCommand.setStartIndex(underlineCommandObject.getInt("startIndex"));
-			predictionManager.processEvent((ICommand) underlineCommand);
+			predictionManager.processEvent((EHICommand) underlineCommand);
 		}
 		JSONArray italicizeCommands = obj.getJSONArray("italicizeCommands");
 		for (int i = 0; i < italicizeCommands.length(); i++) {
 			StyleCommand italicizeCommand = new ItalicizeCommand();
 			italicizeCommandObject = italicizeCommands.getJSONObject(i);
-			((ICommand) italicizeCommand).setTimestamp(italicizeCommandObject.getLong("timeStamp"));
+			((EHICommand) italicizeCommand).setTimestamp(italicizeCommandObject.getLong("timeStamp"));
 			italicizeCommand.setEndIndex(italicizeCommandObject.getInt("endIndex"));
 			italicizeCommand.setStartIndex(italicizeCommandObject.getInt("startIndex"));
-			predictionManager.processEvent((ICommand) italicizeCommand);
+			predictionManager.processEvent((EHICommand) italicizeCommand);
 		}
 		JSONArray highlightCommands = obj.getJSONArray("highlightCommands");
 		for (int i = 0; i < highlightCommands.length(); i++) {
 			StyleCommand highlightCommand = new HighlightCommand();
 			highlightCommandObject = highlightCommands.getJSONObject(i);
-			((ICommand) highlightCommand).setTimestamp(highlightCommandObject.getLong("timeStamp"));
+			((EHICommand) highlightCommand).setTimestamp(highlightCommandObject.getLong("timeStamp"));
 			highlightCommand.setEndIndex(highlightCommandObject.getInt("endIndex"));
 			highlightCommand.setStartIndex(highlightCommandObject.getInt("startIndex"));
-			predictionManager.processEvent((ICommand) highlightCommand);
+			predictionManager.processEvent((EHICommand) highlightCommand);
 		}
 		JSONArray scrollCommands = obj.getJSONArray("scrollCommands");
 		for (int i = 0; i < scrollCommands.length(); i++) {
-			ICommand scrollCommand = new ScrollCommand();
+			EHICommand scrollCommand = new ScrollCommand();
 			scrollCommandObject = scrollCommands.getJSONObject(i);
 			scrollCommand.setTimestamp(scrollCommandObject.getLong("timeStamp"));
 			predictionManager.processEvent(scrollCommand);
 		}
 		JSONArray switchTabCommands = obj.getJSONArray("switchTabCommands");
 		for (int i = 0; i < switchTabCommands.length(); i++) {
-			ICommand switchTabCommand = new SwitchTabsCommand();
+			EHICommand switchTabCommand = new SwitchTabsCommand();
 			switchTabsCommandObject = switchTabCommands.getJSONObject(i);
 			switchTabCommand.setTimestamp(switchTabsCommandObject.getLong("timeStamp"));
 			predictionManager.processEvent(switchTabCommand);
 		}
 		JSONArray windowFocusCommands = obj.getJSONArray("windowFocusCommands");
 		for (int i = 0; i < windowFocusCommands.length(); i++) {
-			ICommand windowFocusCommand = new AWindowFocusCommand();
+			EHICommand windowFocusCommand = new AWindowFocusCommand();
 			windowFocusCommandObject = windowFocusCommands.getJSONObject(i);
 			windowFocusCommand.setTimestamp(windowFocusCommandObject.getLong("timeStamp"));
 			predictionManager.processEvent(windowFocusCommand);
 		}
 		JSONArray updateURLCommands = obj.getJSONArray("updateURLCommands");
 		for (int i = 0; i < updateURLCommands.length(); i++) {
-			ICommand updateURLCommand = new UpdateURLCommand();
+			EHICommand updateURLCommand = new UpdateURLCommand();
 			updateURLCommandObject = updateURLCommands.getJSONObject(i);
 			updateURLCommand.setTimestamp(updateURLCommandObject.getLong("timeStamp"));
 			predictionManager.processEvent(updateURLCommand);
 		}
 		JSONArray createNewTabCommands = obj.getJSONArray("createNewTabCommands");
 		for (int i = 0; i < createNewTabCommands.length(); i++) {
-			ICommand createNewTabCommand = new CreateNewTabCommand();
+			EHICommand createNewTabCommand = new CreateNewTabCommand();
 			createNewTabCommandObject = createNewTabCommands.getJSONObject(i);
 			createNewTabCommand.setTimestamp(createNewTabCommandObject.getLong("timeStamp"));
 			predictionManager.processEvent(createNewTabCommand);
@@ -186,24 +186,24 @@ public class AMyJSONParser implements MyJSONParser {
 		for (int i = 0; i < spellcheckCommands.length(); i++) {
 			ADocumentSpellcheckCommand spellcheckCommand = new ADocumentSpellcheckCommand();
 			spellcheckCommandObject = spellcheckCommands.getJSONObject(i);
-			((ICommand) spellcheckCommand).setTimestamp(spellcheckCommandObject.getLong("timeStamp"));
-			predictionManager.processEvent((ICommand) spellcheckCommand);
+			((EHICommand) spellcheckCommand).setTimestamp(spellcheckCommandObject.getLong("timeStamp"));
+			predictionManager.processEvent((EHICommand) spellcheckCommand);
 		}
 		JSONArray collaborationCommands = obj.getJSONArray("collaborationCommands");
 		for (int i = 0; i < collaborationCommands.length(); i++) {
 			CollaborationCommand collaborationCommand = new CollaborationCommand();
 			collaborationCommandObject = collaborationCommands.getJSONObject(i);
-			((ICommand) collaborationCommand).setTimestamp(collaborationCommandObject.getLong("timeStamp"));
-			predictionManager.processEvent((ICommand) collaborationCommand);
+			((EHICommand) collaborationCommand).setTimestamp(collaborationCommandObject.getLong("timeStamp"));
+			predictionManager.processEvent((EHICommand) collaborationCommand);
 		}
 		JSONArray cursorMoveCommands = obj.getJSONArray("cursorCommands");
 		for (int i = 0; i < cursorMoveCommands.length(); i++) {
 			ADocumentCursorMoveCommand cursorMoveCommand = new ADocumentCursorMoveCommand();
 			cursorMoveCommandObject = cursorMoveCommands.getJSONObject(i);
-			((ICommand) cursorMoveCommand).setTimestamp(cursorMoveCommandObject.getLong("timeStamp"));
+			((EHICommand) cursorMoveCommand).setTimestamp(cursorMoveCommandObject.getLong("timeStamp"));
 			cursorMoveCommand.setLeft(cursorMoveCommandObject.getString("left"));
 			cursorMoveCommand.setTop(cursorMoveCommandObject.getString("top"));
-			predictionManager.processEvent((ICommand) cursorMoveCommand);
+			predictionManager.processEvent((EHICommand) cursorMoveCommand);
 		}
 	}
 

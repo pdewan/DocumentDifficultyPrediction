@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.eclipse.ui.IEditorPart;
 
-import edu.cmu.scs.fluorite.commands.AbstractCommand;
 import edu.cmu.scs.fluorite.commands.ICommand;
-import edu.cmu.scs.fluorite.model.EventRecorder;
+import fluorite.commands.EHAbstractCommand;
+import fluorite.model.EHEventRecorder;
 
-public abstract class AStyleCommand extends AbstractCommand implements StyleCommand {
+public abstract class AStyleCommand extends EHAbstractCommand implements StyleCommand {
 
 	private int startIndex;
 	private int endIndex;
@@ -57,16 +57,16 @@ public abstract class AStyleCommand extends AbstractCommand implements StyleComm
 
 	@Override
 	public String getCategory() {
-		return EventRecorder.MacroCommandCategory;
+		return EHEventRecorder.MacroCommandCategory;
 	}
 
 	@Override
 	public String getCategoryID() {
-		return EventRecorder.MacroCommandCategoryID;
+		return EHEventRecorder.MacroCommandCategoryID;
 	}
 
 	@Override
-	public boolean combine(ICommand anotherCommand) {
+	public boolean combine (ICommand anotherCommand) {
 		// TODO Auto-generated method stub
 		return false;
 	}

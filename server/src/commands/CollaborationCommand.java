@@ -4,11 +4,11 @@ import java.util.Map;
 
 import org.eclipse.ui.IEditorPart;
 
-import edu.cmu.scs.fluorite.commands.AbstractCommand;
 import edu.cmu.scs.fluorite.commands.ICommand;
-import edu.cmu.scs.fluorite.model.EventRecorder;
+import fluorite.commands.EHAbstractCommand;
+import fluorite.model.EHEventRecorder;
 
-public class CollaborationCommand extends AbstractCommand {
+public class CollaborationCommand extends EHAbstractCommand {
 
 	@Override
 	public void dump() {
@@ -46,12 +46,12 @@ public class CollaborationCommand extends AbstractCommand {
 
 	@Override
 	public String getCategory() {
-		return EventRecorder.MacroCommandCategory;
+		return EHEventRecorder.MacroCommandCategory;
 	}
 
 	@Override
 	public String getCategoryID() {
-		return EventRecorder.MacroCommandCategoryID;
+		return EHEventRecorder.MacroCommandCategoryID;
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package commands;
 
-import edu.cmu.scs.fluorite.commands.CompilationCommand;
+import fluorite.commands.EHCompilationCommand;
 
-public class ADocumentSpellcheckCommand extends CompilationCommand {
+public class ADocumentSpellcheckCommand extends EHCompilationCommand {
 
 	@Override
 	public String getCommandType() {

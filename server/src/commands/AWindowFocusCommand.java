@@ -4,11 +4,11 @@ import java.util.Map;
 
 import org.eclipse.ui.IEditorPart;
 
-import edu.cmu.scs.fluorite.commands.AbstractCommand;
 import edu.cmu.scs.fluorite.commands.ICommand;
-import edu.cmu.scs.fluorite.model.EventRecorder;
+import fluorite.commands.EHAbstractCommand;
+import fluorite.model.EHEventRecorder;
 
-public class AWindowFocusCommand extends AbstractCommand {
+public class AWindowFocusCommand extends EHAbstractCommand {
 
 	private long timestamp;
 
@@ -53,12 +53,12 @@ public class AWindowFocusCommand extends AbstractCommand {
 
 	@Override
 	public String getCategory() {
-		return EventRecorder.MacroCommandCategory;
+		return EHEventRecorder.MacroCommandCategory;
 	}
 
 	@Override
 	public String getCategoryID() {
-		return EventRecorder.MacroCommandCategoryID;
+		return EHEventRecorder.MacroCommandCategoryID;
 	}
 
 	@Override

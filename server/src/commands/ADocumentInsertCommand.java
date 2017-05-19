@@ -5,10 +5,11 @@ import java.util.Map;
 
 import org.eclipse.ui.IEditorPart;
 
-import edu.cmu.scs.fluorite.commands.AbstractCommand;
 import edu.cmu.scs.fluorite.commands.ICommand;
+import fluorite.commands.EHAbstractCommand;
+import fluorite.commands.EHICommand;
 
-public class ADocumentInsertCommand extends AbstractCommand implements DocumentInsertCommand {
+public class ADocumentInsertCommand extends EHAbstractCommand implements DocumentInsertCommand {
 
 	private int index;
 	private String content;

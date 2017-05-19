@@ -3,9 +3,9 @@ package commands;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.cmu.scs.fluorite.commands.PasteCommand;
+import fluorite.commands.EHPasteCommand;
 
-public class ADocumentLargeInsertCommand extends PasteCommand {
+public class ADocumentLargeInsertCommand extends EHPasteCommand {
 
 	private int index;
 	private String content;

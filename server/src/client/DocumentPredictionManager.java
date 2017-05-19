@@ -3,11 +3,11 @@ package client;
 import org.json.JSONObject;
 
 import difficultyPrediction.statusManager.StatusListener;
-import edu.cmu.scs.fluorite.commands.ICommand;
+import fluorite.commands.EHICommand;
 
 public interface DocumentPredictionManager extends StatusListener {
 
-	public void processEvent(ICommand event);
+	public void processEvent(EHICommand event);
 
 	public void handleStatusUpdate(JSONObject obj);
 

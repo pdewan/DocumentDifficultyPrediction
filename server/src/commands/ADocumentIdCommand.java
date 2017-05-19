@@ -5,11 +5,12 @@ import java.util.Map;
 
 import org.eclipse.ui.IEditorPart;
 
-import edu.cmu.scs.fluorite.commands.AbstractCommand;
 import edu.cmu.scs.fluorite.commands.ICommand;
-import edu.cmu.scs.fluorite.model.EventRecorder;
+import fluorite.commands.EHAbstractCommand;
+import fluorite.commands.EHICommand;
+import fluorite.model.EHEventRecorder;
 
-public class ADocumentIdCommand extends AbstractCommand {
+public class ADocumentIdCommand extends EHAbstractCommand {
 
 	private long timestamp;
 	private String documentId;
@@ -58,24 +59,24 @@ public class ADocumentIdCommand extends AbstractCommand {
 
 	@Override
 	public String getCategory() {
-		return EventRecorder.MacroCommandCategory;
+		return EHEventRecorder.MacroCommandCategory;
 	}
 
 	@Override
 	public String getCategoryID() {
-		return EventRecorder.MacroCommandCategoryID;
+		return EHEventRecorder.MacroCommandCategoryID;
 	}
 
 	@Override
 	public long getTimestamp() {
 		return timestamp;
 	}
-
-	@Override
-	public boolean combine(ICommand anotherCommand) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//
+//	@Override
+//	public boolean combine(EHICommand anotherCommand) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 	@Override
 	public boolean execute(IEditorPart target) {
@@ -97,6 +98,12 @@ public class ADocumentIdCommand extends AbstractCommand {
 
 	public String getDocumentIdString() {
 		return documentId;
+	}
+
+	@Override
+	public boolean combine(ICommand arg0) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -3,9 +3,9 @@ package commands;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.cmu.scs.fluorite.commands.MoveCaretCommand;
+import fluorite.commands.EHMoveCaretCommand;
 
-public class ADocumentCursorMoveCommand extends MoveCaretCommand {
+public class ADocumentCursorMoveCommand extends EHMoveCaretCommand {
 	private String left;
 	private String top;
 

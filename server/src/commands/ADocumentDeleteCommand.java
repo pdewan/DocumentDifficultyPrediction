@@ -5,10 +5,11 @@ import java.util.Map;
 
 import org.eclipse.ui.IEditorPart;
 
-import edu.cmu.scs.fluorite.commands.AbstractCommand;
 import edu.cmu.scs.fluorite.commands.ICommand;
+import fluorite.commands.EHAbstractCommand;
+import fluorite.commands.EHICommand;
 
-public class ADocumentDeleteCommand extends AbstractCommand implements DocumentDeleteCommand {
+public class ADocumentDeleteCommand extends EHAbstractCommand implements DocumentDeleteCommand {
 
 	private int startIndex;
 	private int endIndex;
@@ -83,10 +84,16 @@ public class ADocumentDeleteCommand extends AbstractCommand implements DocumentD
 		return null;
 	}
 
-	@Override
-	public boolean combine(ICommand anotherCommand) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	@Override
+//	public boolean combine(EHICommand anotherCommand) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+
+//	@Override
+//	public boolean combine(ICommand arg0) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 }

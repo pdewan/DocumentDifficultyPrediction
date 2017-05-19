@@ -2,7 +2,7 @@ package commands;
 
 import java.util.Map;
 
-import edu.cmu.scs.fluorite.commands.DifficulyStatusCommand;
+import fluorite.commands.DifficulyStatusCommand;
 
 public class DocumentStatusCorrection extends DifficulyStatusCommand {
 
